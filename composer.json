@@ -1,0 +1,16 @@
+{
+    "name": "mohammad/mvc",
+    "description": "it is a sample mvc project",
+    "authors": [
+        {
+            "name": "mohammad",
+            "email": "mohamad.darghah@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "./"
+        }
+    },
+    "require": {}
+}
