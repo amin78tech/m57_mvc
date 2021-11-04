@@ -10,10 +10,10 @@ class AdminController {
 
     public function __construct()
     {
-        if (Cookie::get('user') == null) {
-            header("Location: login");
-            exit;
-        }
+        // if (Cookie::get('user') == null) {
+        //     header("Location: login");
+        //     exit;
+        // }
     }
 
     public function showDashboard() {
@@ -24,5 +24,5 @@ class AdminController {
         ]);
     }
 
-    
+
 }

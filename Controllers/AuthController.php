@@ -34,4 +34,10 @@ class AuthController {
             header("Location: login");
         }
     }
+
+    public function logout() {
+        Cookie::destroy('user');
+        Cookie::destroy('user_name');
+        header("Location: login");
+    }
 }
