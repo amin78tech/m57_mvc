@@ -16,7 +16,7 @@ class HomeController {
     }
 
     public function test() {
-        
+        var_dump(getenv('DB_HOST'));
     }
 }
 

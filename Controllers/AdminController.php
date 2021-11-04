@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Models\Admin;
+use Kavenegar\KavenegarApi;
 
 class AdminController {
 
@@ -33,6 +34,7 @@ class AdminController {
 
         Admin::do()->create([
             'email' => $_POST['email'],
+            'phone' => $_POST['phone'],
             'username' => $_POST['username'],
             'password' => $_POST['password'],
             'is_active' => $_POST['isActive'] == 'on' ? 1 : 0 ,
@@ -41,6 +43,9 @@ class AdminController {
         addToSession('messages', [
             'success' => 'user created successfully.'
         ]);
+
+        (new KavenegarApi('4A514462557A50454A446B715A7A4D6F343546444E7672542F56552B364D52536A766D684F675932456B553D'))
+            ->Send('2000500666', $_POST['phone'], 'your account created successfully.');
         
         header('Location: /dashboard/admin/create');
     }

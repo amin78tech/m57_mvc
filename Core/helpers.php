@@ -25,3 +25,18 @@ function removeFromSession($name) {
 function refreshSession() {
     session_destroy();
 }
+
+function env(string $key) {
+    return trim(getenv($key));
+}
+
+function setEnvs() {
+    $path = __DIR__ . "/../.env";
+    $content = fopen($path, 'r');
+
+    while(!feof($content)) {
+        putenv(fgets($content));
+    }
+
+    fclose($content);
+}

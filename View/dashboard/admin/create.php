@@ -11,6 +11,10 @@
               <input type="email" name="email" class="form-control" id="email">
             </div>
             <div class="mb-3">
+              <label for="phone" class="form-label">Phone number</label>
+              <input type="text" name="phone" class="form-control" id="phone">
+            </div>
+            <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input type="text" name="username" class="form-control" id="username">
             </div>

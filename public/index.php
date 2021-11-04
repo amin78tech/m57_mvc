@@ -5,7 +5,7 @@ require '../vendor/autoload.php';
 use App\Controllers\AdminController;
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
-
+use Dotenv\Dotenv;
 $app = new App\Core\App();
 
 $app->get('/home', [HomeController::class, 'index']);
@@ -34,6 +34,7 @@ if (getCookie('user')) {
     $app->post('/admin/delete', [AdminController::class, 'destroy']);
 } 
 
+setEnvs();
 session_start();
 $app->run();
 
