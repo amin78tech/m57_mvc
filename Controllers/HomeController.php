@@ -16,20 +16,7 @@ class HomeController {
     }
 
     public function test() {
-        $db = new Database;
-        $db->setTable('users');
-        // $db->insert([
-        //     'name' => 'reza',
-        //     'username' => 'rezausername',
-        //     'password' => md5('12345'),
-        // ]);
-
-            echo "<pre>";
-        var_dump($db->read([
-            'name' => 'alddi'
-        ]));
         
-        echo "</pre>";
     }
 }
 

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Core\Cookie;
 use App\Core\View;
 use App\Models\Admin;
 
@@ -17,10 +16,10 @@ class AdminController {
     }
 
     public function showDashboard() {
-        $id = Cookie::get('user');
+        $id = getCookie('user');
 
         View::render('home', [
-            'name' => Cookie::get('user_name'),
+            'name' => getCookie('user_name'),
         ]);
     }
 
@@ -39,6 +38,10 @@ class AdminController {
             'is_active' => $_POST['isActive'] == 'on' ? 1 : 0 ,
         ]);
 
+        addToSession('messages', [
+            'success' => 'user created successfully.'
+        ]);
+        
         header('Location: /dashboard/admin/create');
     }
 
@@ -46,5 +49,37 @@ class AdminController {
         View::render('dashboard/admin/show', [
             'admins' => Admin::do()->all(),
         ]);
+    }
+
+    public function edit() {
+        $admin = Admin::do()->find($_GET['id']);
+
+        if (is_null($admin)) {
+            echo "not found";
+            exit;
+        }
+
+        View::render('dashboard/admin/edit', [
+            'id' => $admin->id,
+            'username' => $admin->username,
+            'email' => $admin->email,
+            'isActive' => $admin->is_active,
+        ]);
+    }
+
+    public function update() {
+        Admin::do()->update([
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            'is_active' => $_POST['isActive'] == 'on' ? 1 : 0 ,
+        ], ['id' => $_POST['id']]);
+
+        header("Location: /dashboard/admins");
+    }
+
+    public function destroy() {
+        Admin::do()->delete(['id' => $_POST['id']]);
+
+        header("Location: /dashboard/admins");
     }
 }

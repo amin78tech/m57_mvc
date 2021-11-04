@@ -11,6 +11,11 @@ class View {
         foreach ($data as $key => $value) 
             $$key = $value;
 
+        foreach ($_SESSION['messages'] as $key => $value) 
+            $$key = $value;
+
+        removeFromSession('messages');
+
         ob_start();
 
         require $filePath;

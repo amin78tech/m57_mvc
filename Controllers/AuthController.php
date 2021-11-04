@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Core\Cookie;
 use App\Core\View;
 use App\Models\Admin;
 
@@ -26,8 +25,9 @@ class AuthController {
 
         if ($founded->password == $password) {
 
-            Cookie::create('user', $founded->id);
-            Cookie::create('user_name', $founded->username);
+            createCookie('user', $founded->id);
+            createCookie('user_name', $founded->username);
+
             header("Location: dashboard");
 
         } else {
@@ -36,8 +36,9 @@ class AuthController {
     }
 
     public function logout() {
-        Cookie::destroy('user');
-        Cookie::destroy('user_name');
+        destroyCookie('user');
+        destroyCookie('user_name');
+
         header("Location: login");
     }
 }

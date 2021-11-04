@@ -5,7 +5,6 @@ require '../vendor/autoload.php';
 use App\Controllers\AdminController;
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
-use App\Core\Cookie;
 
 $app = new App\Core\App();
 
@@ -17,7 +16,7 @@ $app->get('/login', [AuthController::class, 'showLogin']);
 
 $app->post('/login', [AuthController::class, 'login']);
 
-if (Cookie::get('user')) {
+if (getCookie('user')) {
     $app->get('/dashboard', [AdminController::class, 'showDashboard']);
 
     $app->post('/logout', [AuthController::class, 'logout']);
@@ -28,10 +27,14 @@ if (Cookie::get('user')) {
 
     $app->get('/dashboard/admins', [AdminController::class, 'show']);
 
+    $app->get('/dashboard/admin/edit', [AdminController::class, 'edit']);
+
+    $app->post('/admin/update', [AdminController::class, 'update']);
+
+    $app->post('/admin/delete', [AdminController::class, 'destroy']);
 } 
 
-// $app->post('path', 'callback');
-
+session_start();
 $app->run();
 
 ?>

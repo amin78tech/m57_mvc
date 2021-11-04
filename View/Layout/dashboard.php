@@ -11,6 +11,11 @@
     <title>Hello, world!</title>
   </head>
   <body>
+    <?php if (isset($success)) { ?>
+        <div class="position-fixed bg-success end-0 top-0 m-2 text-light rounded p-2" style="width: 250px; height: 100px; z-index: 5 !important;">
+            <?php echo $success; ?>
+        </div>
+    <?php } ?>
     <div class="row p-0 m-0">
         <div class="col-2 bg-primary position-fixed text-light" style="height: 100vh">
             <div class="d-flex justify-content-between align-items-center border-bottom">

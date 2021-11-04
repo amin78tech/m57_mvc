@@ -23,8 +23,23 @@
                     <td>
                         <?php echo $admin->email; ?>
                     </td>
-                    <td>
-                        <i class="bi bi-trash text-danger"></i>
+                    <td class="fs-3 d-flex">
+                        <div class="me-3">
+                            <form action="/admin/delete" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $admin->id; ?>">
+                                <button type="submit" class="bg-transparent border-0">
+                                    <i class="bi bi-trash text-danger"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div>
+                            <form action="/dashboard/admin/edit" method="GET">
+                                <input type="hidden" name="id" value="<?php echo $admin->id; ?>">
+                                <button type="submit" class="bg-transparent border-0">
+                                    <i class="bi bi-pencil text-primary"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             <?php } ?>

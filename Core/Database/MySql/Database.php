@@ -33,9 +33,34 @@ class Database implements DatabaseInterface {
         return $this->exec($query);
     }
 
-    public function update(array $data, array $where = []) {}
+    public function update(array $data, array $where = []) {
+        foreach ($data as $k => $v) {
+            $args[] = "$k = '$v'";
+        } ;
+        
+        array_walk($where, function (&$value, $key) {
 
-    public function remove(array $where = []) {}
+            $value = $key . "='" . $value . "'";
+        });
+        $hasCondition = $where != [] ? 'WHERE' : '' ;
+
+        $query =sprintf("UPDATE %s SET %s $hasCondition %s ",$this->table,implode(',', $args), implode(" AND ", $where)) ;
+        return $this->exec($query);
+    }
+
+    public function remove(array $where = []) {
+        array_walk($where, function(&$value, $key) {
+            $value = $key . "='" . $value . "'";
+        });
+
+        $query = sprintf(
+            "DELETE FROM %s WHERE (%s)",
+            $this->table,
+            implode(' AND ', $where),
+        );
+
+        return $this->exec($query);
+    }
 
     public function read(array $where = []) { // where -> ['firstname' => 'foo', 'lastname' => 'bar']
         
