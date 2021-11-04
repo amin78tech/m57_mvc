@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Core\Cookie;
 use App\Core\View;
 use App\Models\Admin;
-use App\Models\User;
 
 class AuthController {
 
@@ -18,15 +18,18 @@ class AuthController {
 
         $founded = Admin::do()->find($email);
 
-        var_dump($founded);
-
         if (count($founded) === 0) {
             header("Location: login");
             exit();
         }
+        $founded = $founded[0];
 
-        if ($founded[0]->password == $password) {
-            header("Location: https://google.com");
+        if ($founded->password == $password) {
+
+            Cookie::create('user', $founded->id);
+            Cookie::create('user_name', $founded->username);
+            header("Location: dashboard");
+
         } else {
             header("Location: login");
         }

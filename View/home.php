@@ -1,12 +1,7 @@
 <?php $layout = 'dashboard'; ?>
 
-<h1>
-    this is a ugly home page. salam
-</h1>
-<p>
-    hello dear <?php echo $user; ?>
-</p>
-<br>
-<p>
-    <?php echo $content; ?>
-</p>
+<div class="w-100" style="height: 100vh">
+    <div class="d-flex justify-content-center align-items-center h-100 fs-1">
+        Welcome <?php echo $name; ?> 😃😃
+    </div>
+</div>

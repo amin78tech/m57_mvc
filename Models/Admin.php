@@ -13,6 +13,4 @@ class Admin extends Model {
             'email' => $email
         ]);
     }
-
-
 }
