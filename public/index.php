@@ -10,10 +10,6 @@ $app->get('/home', [App\Controllers\HomeController::class, 'index']);
 
 $app->get('/test', [App\Controllers\HomeController::class, 'test']);
 
-$app->get('/register', [AuthController::class, 'showRegister']);
-
-$app->post('/register', [AuthController::class, 'register']);
-
 $app->get('/login', [AuthController::class, 'showLogin']);
 
 $app->post('/login', [AuthController::class, 'login']);
