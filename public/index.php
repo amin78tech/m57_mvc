@@ -21,6 +21,13 @@ if (Cookie::get('user')) {
     $app->get('/dashboard', [AdminController::class, 'showDashboard']);
 
     $app->post('/logout', [AuthController::class, 'logout']);
+
+    $app->get('/dashboard/admin/create', [AdminController::class, 'create']);
+
+    $app->post('/admin/store', [AdminController::class, 'store']);
+
+    $app->get('/dashboard/admins', [AdminController::class, 'show']);
+
 } 
 
 // $app->post('path', 'callback');

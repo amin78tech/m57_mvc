@@ -24,5 +24,27 @@ class AdminController {
         ]);
     }
 
+    public function create() {
+        View::render('dashboard/admin/create');
+    }
 
+    public function store() {
+        // TODO1 : validation
+        // TODO2 : amaliat hash kardan be password ezafe shavad
+
+        Admin::do()->create([
+            'email' => $_POST['email'],
+            'username' => $_POST['username'],
+            'password' => $_POST['password'],
+            'is_active' => $_POST['isActive'] == 'on' ? 1 : 0 ,
+        ]);
+
+        header('Location: /dashboard/admin/create');
+    }
+
+    public function show() {
+        View::render('dashboard/admin/show', [
+            'admins' => Admin::do()->all(),
+        ]);
+    }
 }

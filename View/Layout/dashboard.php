@@ -15,7 +15,9 @@
         <div class="col-2 bg-primary position-fixed text-light" style="height: 100vh">
             <div class="d-flex justify-content-between align-items-center border-bottom">
                 <div class="fw-bold fs-1">
-                    Clinic
+                    <a href="/dashboard" class="text-light text-decoration-none">
+                        Clinic
+                    </a>
                 </div>
                 <div class="fs-2">
                     <form action="logout" method="POST">                        
@@ -27,14 +29,18 @@
             </div>
             <div>
                 <div class="fs-3">
-                    Admins
+                    Admin
                 </div>
                 <div class="border-start px-1 mx-2">
                     <div>
-                        create
+                        <a class="text-light text-decoration-none" href="/dashboard/admin/create">
+                            Create
+                        </a>
                     </div>
                     <div>
-                        show
+                        <a class="text-light text-decoration-none" href="/dashboard/admins">
+                            Show
+                        </a>
                     </div>
                 </div>
             </div>

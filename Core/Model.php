@@ -16,4 +16,12 @@ abstract class Model {
     public static function do() {
         return new static;
     }
+
+    public function create(array $data) {
+        $this->db->insert($data);
+    }
+
+    public function all() {
+        return $this->db->read();
+    }
 }

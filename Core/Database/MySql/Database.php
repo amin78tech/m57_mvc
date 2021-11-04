@@ -51,7 +51,6 @@ class Database implements DatabaseInterface {
             implode(' AND ', $where)
         );
 
-        // echo $query;
         return $this->exec($query)->fetchAll(\PDO::FETCH_OBJ);
     }
 
