@@ -14,6 +14,12 @@ class Database implements DatabaseInterface {
         $this->connection = DatabaseConnection::getInstance();
     }
 
+    public static function onTable(string $table) {
+        $db = new self();
+        $db->setTable($table);
+        return $db;
+    }
+
     public function setTable(string $table) {
         $this->table = $table;
     }
@@ -62,7 +68,7 @@ class Database implements DatabaseInterface {
         return $this->exec($query);
     }
 
-    public function read(array $where = []) { // where -> ['firstname' => 'foo', 'lastname' => 'bar']
+    public function read(array $where = [], $condition = "AND") { // where -> ['firstname' => 'foo', 'lastname' => 'bar']
         
         array_walk($where, function(&$value, $key) {
             $value = $key . "='" . $value . "'";
@@ -73,7 +79,18 @@ class Database implements DatabaseInterface {
         $query = sprintf(
             "SELECT * FROM %s $hasCondition %s", 
             $this->table, 
-            implode(' AND ', $where)
+            implode(' ' . $condition . ' ', $where)
+        );
+
+        return $this->exec($query)->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function readIn(string $column, array $values) {
+        $query = sprintf(
+            "SELECT * FROM %s WHERE %s IN (%s)", 
+            $this->table, 
+            $column,
+            implode(',', $values),
         );
 
         return $this->exec($query)->fetchAll(\PDO::FETCH_OBJ);

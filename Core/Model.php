@@ -40,7 +40,25 @@ abstract class Model {
         return $model[0];
     }
 
+    public function readIn($column, $values) {
+        return $this->db->readIn($column, $values);
+    }
+
     public function all() {
         return $this->db->read();
+    }
+
+    public function getManyToManyRelation($id, $pivot_table, $related_table, $foreign_key, $related_foreign_key) {
+        $pivot = Database::onTable($pivot_table)->read([$foreign_key => $id]);
+        $ids = [];
+        foreach($pivot as $record) {
+            array_push($ids, $record->$related_foreign_key);
+        }
+        
+        return Database::onTable($related_table)->readIn('id', $ids);
+    }
+
+    public function setManyToManyRelation($clinic_id, $section_id, $pivot_table) {
+        $pivot = Database::onTable($pivot_table)->insert(compact('clinic_id', 'section_id'));
     }
 }

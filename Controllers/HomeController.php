@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Database\MySql\Database;
 use App\Core\View;
+use App\Models\Clinic;
 
 class HomeController {
 
@@ -16,7 +17,10 @@ class HomeController {
     }
 
     public function test() {
-        var_dump(getenv('DB_HOST'));
+        // Clinic::do()->setSection(6, 2);
+        echo "<pre>";
+        var_dump(Clinic::do()->getSections(6));
+        echo "</pre>";
     }
 }
 
