@@ -5,25 +5,32 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Models\Admin;
 use App\Models\Clinic;
+use App\Models\Section;
 use Kavenegar\KavenegarApi;
 
 class ClinicController {
 
     public function create() {
-        View::render('dashboard/clinic/create');
+        View::render('dashboard/clinic/create', [
+            'sections' => Section::do()->all(),
+        ]);
     }
 
     public function store() {
         // TODO1 : validation
         // TODO2 : amaliat hash kardan be password ezafe shavad
 
-        Clinic::do()->create([
+        $clinic_id = Clinic::do()->create([
             'name' => $_POST['name'],
             'phone' => $_POST['phone'],
             'address' => $_POST['address'],
             'is_active' => $_POST['isActive'] == 'on' ? 1 : 0 ,
             'is_full_time' => $_POST['isFullTime'] == 'on' ? 1 : 0 ,
         ]);
+
+        foreach($_POST['sections'] as $id) {
+            Clinic::do()->setSections($clinic_id, $id);
+        }
 
         addToSession('messages', [
             'success' => 'clinic created successfully.'
@@ -39,31 +46,43 @@ class ClinicController {
     }
 
     public function edit() {
-        $admin = Admin::do()->find($_GET['id']);
+        $clinic = Clinic::do()->find($_GET['id']);
 
-        if (is_null($admin)) {
+        if (is_null($clinic)) {
             echo "not found";
             exit;
         }
 
         View::render('dashboard/clinic/edit', [
-            'id' => $admin->id,
-            'username' => $admin->username,
-            'email' => $admin->email,
-            'isActive' => $admin->is_active,
+            'id' => $clinic->id,
+            'name' => $clinic->name,
+            'address' => $clinic->address,
+            'phone' => $clinic->phone,
+            'isActive' => $clinic->is_active,
+            'isFullTime' => $clinic->is_full_time,
+            'sections' => Section::do()->all(),
+            'selectedSections' => Clinic::do()->getSectionsId($_GET['id']),
         ]);
     }
 
     public function update() {
         // TODO1 : validation
 
-        Admin::do()->update([
-            'username' => $_POST['username'],
-            'email' => $_POST['email'],
+        Clinic::do()->update([
+            'name' => $_POST['name'],
+            'phone' => $_POST['phone'],
+            'address' => $_POST['address'],
             'is_active' => $_POST['isActive'] == 'on' ? 1 : 0 ,
+            'is_full_time' => $_POST['isFullTime'] == 'on' ? 1 : 0 ,
         ], ['id' => $_POST['id']]);
 
-        header("Location: /dashboard/clinics");
+        Clinic::do()->syncSections($_POST['id'], $_POST['sections']);
+
+        addToSession('messages', [
+            'success' => 'clinic updated successfully.'
+        ]);
+        
+        header('Location: /dashboard/clinics');
     }
 
     public function destroy() {

@@ -99,4 +99,8 @@ class Database implements DatabaseInterface {
     private function exec(string $query) {
         return $this->connection->connection()->query($query);
     }
+
+    public function lastId() {
+        return $this->connection->connection()->lastInsertId();
+    }
 }

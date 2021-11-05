@@ -19,6 +19,7 @@ abstract class Model {
 
     public function create(array $data) {
         $this->db->insert($data);
+        return $this->db->lastId();
     }
 
     public function update(array $data, array $where) {
@@ -48,17 +49,26 @@ abstract class Model {
         return $this->db->read();
     }
 
-    public function getManyToManyRelation($id, $pivot_table, $related_table, $foreign_key, $related_foreign_key) {
+    public function getManyToManyIds($id, $pivot_table, $foreign_key, $related_foreign_key) {
         $pivot = Database::onTable($pivot_table)->read([$foreign_key => $id]);
         $ids = [];
         foreach($pivot as $record) {
             array_push($ids, $record->$related_foreign_key);
         }
+
+        return $ids;
+    }
+
+    public function getManyToManyRelation($id, $pivot_table, $related_table, $foreign_key, $related_foreign_key) {
         
-        return Database::onTable($related_table)->readIn('id', $ids);
+        return Database::onTable($related_table)->readIn(
+            'id',
+            $this->getManyToManyIds($id, $pivot_table, $foreign_key, $related_foreign_key),
+        );
     }
 
     public function setManyToManyRelation($clinic_id, $section_id, $pivot_table) {
         $pivot = Database::onTable($pivot_table)->insert(compact('clinic_id', 'section_id'));
     }
+
 }
