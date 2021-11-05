@@ -4,9 +4,11 @@ namespace App\Core;
 
 class App {
     private $router;
+    public static $ROOTDIR;
 
     public function __construct() {
         $this->router = new Routes();
+        self::$ROOTDIR = dirname(__DIR__) . '/';
     }
 
     public function run() {

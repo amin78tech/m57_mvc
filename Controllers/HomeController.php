@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\App;
 use App\Core\Database\MySql\Database;
 use App\Core\View;
 use App\Models\Clinic;
@@ -17,10 +18,7 @@ class HomeController {
     }
 
     public function test() {
-        // Clinic::do()->setSection(6, 2);
-        echo "<pre>";
-        var_dump(Clinic::do()->getSections(6));
-        echo "</pre>";
+        echo App::$ROOTDIR;
     }
 }
 

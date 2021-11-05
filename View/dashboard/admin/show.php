@@ -8,6 +8,7 @@
         <table class="table table-striped">
             <tr>
                 <th>id</th>
+                <th></th>
                 <th>username</th>
                 <th>email</th>
                 <th>active</th>
@@ -17,6 +18,9 @@
                 <tr>
                     <td>
                         <?php echo $admin->id; ?>
+                    </td>
+                    <td>
+                        <img src="<?php echo !is_null($admin->profile_path) ? App\Core\File::pathToUrl($admin->profile_path) : 'https://retailx.com/wp-content/uploads/2019/12/iStock-476085198-300x300.jpg'; ?>" alt="" width="30" height="30">
                     </td>
                     <td>
                         <?php echo $admin->username; ?>

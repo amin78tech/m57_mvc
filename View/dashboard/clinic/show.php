@@ -1,5 +1,7 @@
 <?php $layout = 'dashboard'; ?>
 
+<!-- TODO5 : namayesh sections hay har clinic (harjor salah donestid. age khastid ye page jadid besazid) -->
+
 <div class="p-5">
     <div class="fs-1 fw-bold border-bottom mb-4">
         Clinics

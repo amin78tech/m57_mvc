@@ -8,6 +8,9 @@ abstract class Model {
     protected $db;
     protected $table;
 
+    // TODO6 : rabetey yek be chand ro piyadesazi konid
+    // TODO emtiyazi : kollan system relation ha refactore shavad be tori ke tedad query haye kamtari zade shavad
+
     public function __construct() {
         $this->db = new Database; 
         $this->db->setTable($this->table);

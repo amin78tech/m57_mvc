@@ -5,7 +5,7 @@
         Create Admin
     </div>
     <div class="mt-4">
-        <form action="/admin/store" method="POST">
+        <form action="/admin/store" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
               <input type="email" name="email" class="form-control" id="email">
@@ -21,6 +21,10 @@
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input type="password" name="password" class="form-control" id="password">
+            </div>
+            <div class="mb-3">
+              <label for="profile" class="form-label">Select a profile photo (optianal)</label>
+              <input type="file" name="profile" id="profile" class="form-control">
             </div>
             <div class="mb-3 form-check">
               <input type="checkbox" name="isActive" class="form-check-input" id="active">

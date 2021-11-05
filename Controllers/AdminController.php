@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Core\App;
+use App\Core\File;
 use App\Core\View;
 use App\Models\Admin;
 use Kavenegar\KavenegarApi;
@@ -32,20 +34,37 @@ class AdminController {
         // TODO1 : validation
         // TODO2 : amaliat hash kardan be password ezafe shavad
 
+        $file_uploaded = false;
+
+        if ($_FILES['profile']['error'] == 0) {
+            $file = File::uploadedFile('profile');
+
+            $path = $file->validate([
+                'checkSize' => [10000],
+                'checkType' => ['image'],
+            ], [
+                'callback' => [$file, 'save'],
+                'params' => [ App::$ROOTDIR . 'public/storage/']
+            ]);
+
+            $file_uploaded = true;
+        }
+
         Admin::do()->create([
             'email' => $_POST['email'],
             'phone' => $_POST['phone'],
             'username' => $_POST['username'],
             'password' => $_POST['password'],
             'is_active' => $_POST['isActive'] == 'on' ? 1 : 0 ,
+            'profile_path' => $file_uploaded ? $path : null,
         ]);
 
         addToSession('messages', [
             'success' => 'user created successfully.'
         ]);
 
-        (new KavenegarApi('4A514462557A50454A446B715A7A4D6F343546444E7672542F56552B364D52536A766D684F675932456B553D'))
-            ->Send('2000500666', $_POST['phone'], 'your account created successfully.');
+        // (new KavenegarApi('4A514462557A50454A446B715A7A4D6F343546444E7672542F56552B364D52536A766D684F675932456B553D'))
+            // ->Send('2000500666', $_POST['phone'], 'your account created successfully.');
         
         header('Location: /dashboard/admins');
     }
