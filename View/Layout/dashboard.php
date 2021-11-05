@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-    <title>Hello, world!</title>
+    <title><?php echo env('APP_NAME');?></title>
   </head>
   <body>
     <?php if (isset($success)) { ?>
@@ -18,7 +18,7 @@
     <?php } ?>
     <div class="row p-0 m-0">
         <div class="col-2 bg-primary position-fixed text-light" style="height: 100vh">
-            <div class="d-flex justify-content-between align-items-center border-bottom">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-4">
                 <div class="fw-bold fs-1">
                     <a href="/dashboard" class="text-light text-decoration-none">
                         Clinic
@@ -32,7 +32,7 @@
                     </form>
                 </div>
             </div>
-            <div>
+            <div class="border-bottom pb-2">
                 <div class="fs-3">
                     Admin
                 </div>
@@ -44,6 +44,40 @@
                     </div>
                     <div>
                         <a class="text-light text-decoration-none" href="/dashboard/admins">
+                            Show
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom pb-2">
+                <div class="fs-3">
+                    Clinic
+                </div>
+                <div class="border-start px-1 mx-2">
+                    <div>
+                        <a class="text-light text-decoration-none" href="/dashboard/clinic/create">
+                            Create
+                        </a>
+                    </div>
+                    <div>
+                        <a class="text-light text-decoration-none" href="/dashboard/clinics">
+                            Show
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom pb-2">
+                <div class="fs-3">
+                    Section
+                </div>
+                <div class="border-start px-1 mx-2">
+                    <div>
+                        <a class="text-light text-decoration-none" href="/dashboard/section/create">
+                            Create
+                        </a>
+                    </div>
+                    <div>
+                        <a class="text-light text-decoration-none" href="/dashboard/sections">
                             Show
                         </a>
                     </div>

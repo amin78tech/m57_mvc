@@ -47,7 +47,7 @@ class AdminController {
         (new KavenegarApi('4A514462557A50454A446B715A7A4D6F343546444E7672542F56552B364D52536A766D684F675932456B553D'))
             ->Send('2000500666', $_POST['phone'], 'your account created successfully.');
         
-        header('Location: /dashboard/admin/create');
+        header('Location: /dashboard/admins');
     }
 
     public function show() {

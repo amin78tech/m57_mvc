@@ -2,31 +2,27 @@
 
 <div class="p-5">
     <div class="fs-1 fw-bold border-bottom mb-4">
-        Admins
+        Sections
     </div>
     <div>
         <table class="table table-striped">
             <tr>
                 <th>id</th>
-                <th>username</th>
-                <th>email</th>
+                <th>title</th>
                 <th>active</th>
                 <th>action</th>
             </tr>
-            <?php foreach($admins as $admin) { ?>
+            <?php foreach($sections as $section) { ?>
                 <tr>
                     <td>
-                        <?php echo $admin->id; ?>
+                        <?php echo $section->id; ?>
                     </td>
                     <td>
-                        <?php echo $admin->username; ?>
-                    </td>
-                    <td>
-                        <?php echo $admin->email; ?>
+                        <?php echo $section->title; ?>
                     </td>
                     <td>
                         <div class="fs-4">
-                            <?php if($admin->is_active) { ?>
+                            <?php if($section->is_active) { ?>
                                 <i class="bi bi-check-circle-fill text-success"></i>
                             <?php } else { ?>
                                 <i class="bi bi-x-circle-fill text-danger"></i>
